@@ -1,0 +1,14 @@
+torch==1.13.0
+transformers==2.5.0
+wandb==0.15.4
+pandas==1.3.5
+numpy==1.21.6
+scikit-learn==1.0.2
+scipy==1.7.3
+matplotlib==3.5.3
+seaborn==0.12.1
+tqdm==4.64.1
+tensorboard==2.11.0
+tensorboardx==2.5.1
+regex==2022.10.31
+sentencepiece==0.1.91
