@@ -92,7 +92,7 @@ for LR in "${learning_rates[@]}"; do
     for wp in 0.1 0.2; do
         for wd in 0.0001 0.001 0.005 0.01 0.02; do
             for lr in 1$LR 3$LR; do
-                python run_finetune_WANDB.py \
+                python scripts/run_finetune_WANDB.py \
                     --model_type dna \
                     --tokenizer_name=dna$KMER \
                     --model_name_or_path $MODEL_PATH \
@@ -147,7 +147,7 @@ export CUDA_VISIBLE_DEVICES=1,2,3,4,5
 # --- 2. RUN PREDICTION ---
 # Ensure you are in the directory containing run_finetune_WANDB.py before running.
 
-python run_finetune_WANDB.py \
+python scripts/run_finetune_WANDB.py \
     --model_type dna \
     --tokenizer_name=dna$KMER \
     --model_name_or_path $MODEL_PATH \
