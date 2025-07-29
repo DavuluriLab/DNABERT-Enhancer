@@ -24,24 +24,19 @@
 ## Model
 <p align="justify"> DNABERT-Enhancer is built upon [DNABERT](https://github.com/jerryji1993/DNABERT), a large language model for the human genome, fine-tuned specifically for enhancer prediction. </p>
 
-## Usage of the Model
-Instructions on how to effectively use the DNABERT-Enhancer model.
+## Model and Usage
+This section describes how to use the code in this repository, including setting up the environment, fine-tuning a new model, and generating predictions with a pre-trained model.
 
-  - #### **Download Fine-tuned Model and Prediction :** Details on downloading the model and instructions for fine-tuning and prediction will be provided upon request. 
-  ### Requirements
+### Requirements
 
-Before running the scripts, please install the necessary dependencies. We recommend creating a dedicated Python virtual environment for this project.
-
-1.  **Install Packages:** You can install all required packages using the `requirements.txt` file provided in this repository.
-    ```bash
-    pip install -r requirements.txt
-    ```
-    *(Note: You will need to create a `requirements.txt` file that lists all necessary libraries, such as `torch`, `transformers`, `wandb`, `scikit-learn`, etc.)*
-
-2.  **Login to W&B:** The scripts use Weights & Biases for experiment tracking. You will need to log into your W&B account from your terminal.
-    ```bash
-    wandb login
-    ```
+Before running the scripts, please install the necessary dependencies. We recommend creating a Python virtual environment. You can install all required packages using the `requirements.txt` file:
+```bash
+pip install -r requirements.txt
+```
+**Login to W&B:** The scripts use Weights & Biases for experiment tracking. You will need to log into your W&B account from your terminal.
+```bash
+wandb login
+```
 
 ### Download Fine-tuned Models
 
@@ -130,7 +125,7 @@ for LR in "${learning_rates[@]}"; do
         done
     done
 done
-
+```
   
   - #### Model Highlights:
     <img src="Figures/Model_performance.png" title="Performance metrics of the two DNABERT-Enhancer models">
