@@ -38,11 +38,11 @@ DNABERT-Enhancer is built upon [DNABERT](https://github.com/jerryji1993/DNABERT)
   ```
 
 ### Download Fine-tuned Models
-
+---
 The final fine-tuned models used to generate the results in our paper are currently under review. **Upon formal acceptance of the paper, we will upload all model weights to a public repository (e.g., Hugging Face Hub or Zenodo) and provide the download links here.**
 
 ### Fine-tuning the Model
-
+---
 You can fine-tune the DNABERT model on your own dataset by running the provided training script. This script is configured to perform a hyperparameter search.
 1.  **Configure Paths:** Open the `train.sh` script and modify the environment variables at the top to match your system's directory structure. You must set `MODEL_PATH`, `DATA_PATH`, `OUTPUT_PATH`, etc.
 2.  **Execute the Script:** Run the script from your terminal.
@@ -124,6 +124,7 @@ for LR in "${learning_rates[@]}"; do
 done
 ```
 ### Getting Predictions from the Model
+---
 To get predictions on new data using a fine-tuned model, use the `predict.sh` script.
 1.  **Configure Paths:**  Update the `MODEL_PATH` to point to your fine-tuned model directory and `DATA_PATH` to point to the data you want to analyze.
 2.  **Execute the Script:** Run the script from your terminal.
@@ -167,7 +168,7 @@ python scripts/run_finetune_WANDB.py \
     --n_process 30
 ```
 ### Storing the Results in W&B
-
+---
 Both the fine-tuning and prediction scripts are integrated with **Weights & Biases (W&B)** for experiment tracking. When you run the scripts, the following information is automatically logged to your W&B account:
 
 -   **Hyperparameters:** Learning rate, batch size, weight decay, etc.
@@ -178,9 +179,11 @@ Both the fine-tuning and prediction scripts are integrated with **Weights & Bias
 This allows for easy comparison between runs and ensures full reproducibility of our results. All experiments from our paper are logged and can be viewed in our public W&B project (link to be provided upon publication).
 
 ### Model Highlights:
+---
 <img src="Figures/Model_performance.png" title="Performance metrics of the two DNABERT-Enhancer models">
 
 ## Citation
+---
 If you use the DNABERT-Enhancer in your research, please cite our paper:
 
 ```bib
