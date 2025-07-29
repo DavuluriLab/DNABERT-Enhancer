@@ -6,11 +6,12 @@
 ## Table of Contents
 - [Introduction](#introduction)
 - [Abstract](#abstract)
-- - [Model and Usage](#model-and-usage)
-  - [Usage](#usage)
-    - [Download Fine-tuned Model](#download-fine-tuned-model)
-    - [Getting Prediction from the Model](#getting-prediction-from-the-model)
-    - [Storing the Results in W&B](#storing-the-results-in-wb)
+- [Model and Usage](#model-and-usage)
+  - [Requirements](#requirements)
+  - [Download Fine-tuned Models](#download-fine-tuned-models)
+  - [Fine-tuning the Model](#fine-tuning-the-model)
+  - [Getting Predictions from the Model](#getting-predictions-from-the-model)
+  - [Storing the Results in W&B](#storing-the-results-in-wb)
 - [Citation](#citation)
 - [Contact](#contact)
 
