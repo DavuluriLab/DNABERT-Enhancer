@@ -45,10 +45,8 @@ The final fine-tuned models used to generate the results in our paper are curren
 ### Fine-tuning the Model
 
 You can fine-tune the DNABERT model on your own dataset by running the provided training script. This script is configured to perform a hyperparameter search.
-
 1.  **Configure Paths:** Open the `train.sh` script and modify the environment variables at the top to match your system's directory structure. You must set `MODEL_PATH`, `DATA_PATH`, `OUTPUT_PATH`, etc.
 2.  **Execute the Script:** Run the script from your terminal.
-
 **`train.sh`**
 ```bash
 #!/bin/bash
@@ -126,8 +124,61 @@ for LR in "${learning_rates[@]}"; do
     done
 done
 ```
-  
-  - #### Model Highlights:
+### Getting Predictions from the Model
+To get predictions on new data using a fine-tuned model, use the `predict.sh` script.
+1.  **Configure Paths:**  Update the `MODEL_PATH` to point to your fine-tuned model directory and `DATA_PATH` to point to the data you want to analyze.
+2.  **Execute the Script:** Run the script from your terminal.
+**`predict.sh`**
+```bash
+#!/bin/bash
+
+# --- 1. CONFIGURE YOUR PATHS ---
+export KMER=6
+export DATA_NAME=TFBS_prediction
+export ARCHITECTURE=TFBS_H3K27ac
+export CLASSES_NAME="Enhancer_NonEnhancer"
+export MODEL_PATH="/path/to/your/finetuned_model_checkpoint"   # UPDATE THIS
+export DATA_PATH="/path/to/your/prediction_data/$DATA_NAME"    # UPDATE THIS
+export PREDICTION_PATH="/path/to/your/output/Predictions"      # UPDATE THIS
+export SUMMARY_PATH="/path/to/your/output/Results"             # UPDATE THIS
+export TB_PATH="/path/to/your/output/TB_Logfiles"              # UPDATE THIS
+export CUDA_VISIBLE_DEVICES=1,2,3,4,5
+
+# --- 2. RUN PREDICTION ---
+# Ensure you are in the directory containing run_finetune_WANDB.py before running.
+
+python run_finetune_WANDB.py \
+    --model_type dna \
+    --tokenizer_name=dna$KMER \
+    --model_name_or_path $MODEL_PATH \
+    --task_name dnaprom \
+    --do_visualize \
+    --visualize_data_dir $DATA_PATH \
+    --classes_name $CLASSES_NAME \
+    --architecture $ARCHITECTURE \
+    --visualize_models $KMER \
+    --data_dir $DATA_PATH \
+    --max_seq_length 200 \
+    --per_gpu_pred_batch_size=64 \
+    --output_dir $MODEL_PATH \
+    --predict_dir $PREDICTION_PATH \
+    --tb_log_dir $TB_PATH \
+    --wandb_tags $ARCHITECTURE $CLASSES_NAME $DATA_NAME \
+    --summary_dir $SUMMARY_PATH \
+    --n_process 30
+```
+### Storing the Results in W&B
+
+Both the fine-tuning and prediction scripts are integrated with **Weights & Biases (W&B)** for experiment tracking. When you run the scripts, the following information is automatically logged to your W&B account:
+
+-   **Hyperparameters:** Learning rate, batch size, weight decay, etc.
+-   **Performance Metrics:** Training/evaluation loss, accuracy, F1-score, etc.
+-   **System Metrics:** GPU/CPU utilization.
+-   **Output Files:** Model checkpoints and prediction results can be saved as W&B artifacts.
+
+This allows for easy comparison between runs and ensures full reproducibility of our results. All experiments from our paper are logged and can be viewed in our public W&B project (link to be provided upon publication).
+
+### Model Highlights:
     <img src="Figures/Model_performance.png" title="Performance metrics of the two DNABERT-Enhancer models">
 
 ## Citation
