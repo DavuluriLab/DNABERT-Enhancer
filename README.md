@@ -28,50 +28,71 @@
 Instructions on how to effectively use the DNABERT-Enhancer model.
 
   - #### **Download Fine-tuned Model and Prediction :** Details on downloading the model and instructions for fine-tuning and prediction will be provided upon request. 
-  Requirements
-Before running the scripts, please install the necessary dependencies. We recommend creating a Python virtual environment. You can install all required packages using the requirements.txt file:
+  ### Requirements
 
-Bash
+Before running the scripts, please install the necessary dependencies. We recommend creating a dedicated Python virtual environment for this project.
 
-pip install -r requirements.txt
-(You should create a requirements.txt file containing libraries like torch, transformers, wandb, scikit-learn, etc.)
+1.  **Install Packages:** You can install all required packages using the `requirements.txt` file provided in this repository.
+    ```bash
+    pip install -r requirements.txt
+    ```
+    *(Note: You will need to create a `requirements.txt` file that lists all necessary libraries, such as `torch`, `transformers`, `wandb`, `scikit-learn`, etc.)*
 
-You will also need to be logged into your Weights & Biases account to log experiment results:
+2.  **Login to W&B:** The scripts use Weights & Biases for experiment tracking. You will need to log into your W&B account from your terminal.
+    ```bash
+    wandb login
+    ```
 
-Bash
+### Download Fine-tuned Models
 
-wandb login
-Download Fine-tuned Models
-The final fine-tuned models used to generate the results in our paper are currently under review. Upon formal acceptance of the paper, we will upload all model weights to a public repository (e.g., Hugging Face Hub or Zenodo) and provide the download links here.
+The final fine-tuned models used to generate the results in our paper are currently under review. **Upon formal acceptance of the paper, we will upload all model weights to a public repository (e.g., Hugging Face Hub or Zenodo) and provide the download links here.**
 
-Fine-tuning the Model
-You can fine-tune the DNABERT model on your own dataset by running the provided training script. This script performs a hyperparameter search to optimize the model.
+### Fine-tuning the Model
 
-Configure Paths: Open the script and modify the environment variables at the top to match your system's directory structure. You must set MODEL_PATH, DATA_PATH, OUTPUT_PATH, etc.
+You can fine-tune the DNABERT model on your own dataset by running the provided training script. This script is configured to perform a hyperparameter search.
 
-Execute the Script: Run the following command from the repository's root directory.
+1.  **Configure Paths:** Open the `train.sh` script and modify the environment variables at the top to match your system's directory structure. You must set `MODEL_PATH`, `DATA_PATH`, `OUTPUT_PATH`, etc.
+2.  **Execute the Script:** Run the script from your terminal.
 
-Bash
-
+**`train.sh`**
+```bash
 #!/bin/bash
 
-# --- Configuration ---
+# --- 1. CONFIGURE YOUR PATHS ---
 export KMER=6
 export CLASSES_NAME="Enhancer_NonEnhancer"
 export DATA_NAME=24k_true_prediction_data
 export DATA_SPLIT=80-20
 export ARCHITECTURE="Initial_Screen_Enhancer_Models"
-export MODEL_PATH="/path/to/your/pretrained_model/6-new-12w-0" # UPDATE THIS
-export DATA_PATH="/path/to/your/data/$DATA_NAME/$DATA_SPLIT"  # UPDATE THIS
-export OUTPUT_PATH="/path/to/your/output/Finetuned_models"   # UPDATE THIS
-export TB_PATH="/path/to/your/output/TB_Logfiles"            # UPDATE THIS
-export SUMMARY_PATH="/path/to/your/output/Results"           # UPDATE THIS
+export MODEL_PATH="/path/to/your/pretrained_dnabert/6-new-12w-0" # UPDATE THIS
+export DATA_PATH="/path/to/your/data/$DATA_NAME/$DATA_SPLIT"     # UPDATE THIS
+export OUTPUT_PATH="/path/to/your/output/Finetuned_models"      # UPDATE THIS
+export TB_PATH="/path/to/your/output/TB_Logfiles"               # UPDATE THIS
+export SUMMARY_PATH="/path/to/your/output/Results"              # UPDATE THIS
 export CUDA_VISIBLE_DEVICES=0,1,2
 
-# --- Training Script ---
+# --- 2. RUN TRAINING ---
 # This script iterates through different learning rates, warmup percentages, and weight decays.
+# Ensure you are in the directory containing run_finetune_WANDB.py before running.
+
 learning_rates=("e-3" "e-4" "e-5" "e-6")
 BATCH_SIZE=230
+
+# Function to calculate logging and saving steps based on training data size
+calculate_steps() {
+    local train_file=$1
+    local batch_size=$2
+    local num_gpus=$(echo "$CUDA_VISIBLE_DEVICES" | tr -cd ',' | wc -c)
+    num_gpus=$((num_gpus + 1))
+    local num_lines=$(cat "$train_file" | wc -l)
+    let "num_examples=num_lines-1" # Exclude header
+    let "num_steps=num_examples/(batch_size*num_gpus)"
+    let "logging_steps=num_steps*3/2"
+    let "save_steps=num_steps*3"
+    echo "$logging_steps $save_steps"
+}
+
+read logging_steps save_steps <<< $(calculate_steps "$DATA_PATH/train.tsv" $BATCH_SIZE)
 
 for LR in "${learning_rates[@]}"; do
     echo "Processing for Learning Rate: $LR"
@@ -89,66 +110,26 @@ for LR in "${learning_rates[@]}"; do
                     --do_eval \
                     --data_dir $DATA_PATH \
                     --max_seq_length 200 \
-                    --per_gpu_train_batch_size=$BATCH_SIZE \
+                    --per_gpu_eval_batch_size=$BATCH_SIZE   \
+                    --per_gpu_train_batch_size=$BATCH_SIZE  \
                     --learning_rate $lr \
                     --num_train_epochs 15 \
                     --output_dir $OUTPUT_PATH \
+                    --tb_log_dir $TB_PATH \
+                    --summary_dir $SUMMARY_PATH \
+                    --evaluate_during_training \
+                    --logging_steps $logging_steps \
+                    --save_steps $save_steps \
                     --warmup_percent $wp \
-                    --weight_decay $wd \
+                    --hidden_dropout_prob 0.1 \
                     --overwrite_output \
-                    --wandb_tags $CLASSES_NAME $DATA_NAME $LR $DATA_SPLIT
+                    --weight_decay $wd \
+                    --wandb_tags $CLASSES_NAME $DATA_NAME $LR $DATA_SPLIT \
+                    --n_process 36
             done
         done
     done
 done
-Getting Predictions from the Model
-To get predictions on new data using a fine-tuned model, use the prediction script below.
-
-Configure Paths: Update the MODEL_PATH to point to your fine-tuned model directory and DATA_PATH to point to the data you want to analyze.
-
-Execute the Script:
-
-Bash
-
-#!/bin/bash
-
-# --- Configuration ---
-export KMER=6
-export DATA_NAME=TFBS_prediction
-export ARCHITECTURE=TFBS_H3K27ac
-export CLASSES_NAME="Enhancer_NonEnhancer"
-export MODEL_PATH="/path/to/your/finetuned_model_checkpoint"   # UPDATE THIS
-export DATA_PATH="/path/to/your/prediction_data/$DATA_NAME" # UPDATE THIS
-export PREDICTION_PATH="/path/to/your/output/Predictions"     # UPDATE THIS
-export CUDA_VISIBLE_DEVICES=1,2,3,4,5
-
-# --- Prediction Script ---
-python run_finetune_WANDB.py \
-    --model_type dna \
-    --tokenizer_name=dna$KMER \
-    --model_name_or_path $MODEL_PATH \
-    --task_name dnaprom \
-    --do_visualize \
-    --visualize_data_dir $DATA_PATH \
-    --classes_name $CLASSES_NAME \
-    --architecture $ARCHITECTURE \
-    --max_seq_length 200 \
-    --per_gpu_pred_batch_size=64 \
-    --output_dir $MODEL_PATH \
-    --predict_dir $PREDICTION_PATH \
-    --wandb_tags $ARCHITECTURE $CLASSES_NAME $DATA_NAME
-Storing Results in W&B
-Both the fine-tuning and prediction scripts are integrated with Weights & Biases (W&B) for experiment tracking. When you run the scripts, the following information is automatically logged to your W&B account:
-
-Hyperparameters: Learning rate, batch size, weight decay, etc.
-
-Performance Metrics: Training/evaluation loss, accuracy, F1-score, etc.
-
-System Metrics: GPU/CPU utilization.
-
-Output Files: Model checkpoints and prediction results can be saved as W&B artifacts.
-
-This allows for easy comparison between runs and ensures full reproducibility of our results. All experiments from our paper are logged and can be viewed in our public W&B project (link to be provided upon publication).
 
   
   - #### Model Highlights:
