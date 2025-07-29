@@ -179,7 +179,7 @@ Both the fine-tuning and prediction scripts are integrated with **Weights & Bias
 This allows for easy comparison between runs and ensures full reproducibility of our results. All experiments from our paper are logged and can be viewed in our public W&B project (link to be provided upon publication).
 
 ### Model Highlights:
-    <img src="Figures/Model_performance.png" title="Performance metrics of the two DNABERT-Enhancer models">
+<img src="Figures/Model_performance.png" title="Performance metrics of the two DNABERT-Enhancer models">
 
 ## Citation
 If you use the DNABERT-Enhancer in your research, please cite our paper:
