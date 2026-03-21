@@ -5,7 +5,6 @@ This repository provides the official implementation of DNABERT-Enhancer, includ
 
 ## Table of Contents
 - [Model Overview](#model-overview)
-- [Model Architecture](#model-architecture)
 - [Repository Structure](#repository-structure)
 - [Installation](#installation)
 - [Using the Pretrained Model](#using-the-pretrained-model)
@@ -24,23 +23,12 @@ This repository provides the official implementation of DNABERT-Enhancer, includ
 
 Key characteristics of the model:
 <ul>
-  <li>Built on a DNABERT backbone</li>
-  <li>Learns contextual DNA sequence representations</li>
-  <li>Predicts enhancer probability for input sequences</li>
+  <li>Transformer-based architecture</li>
+  <li>Uses pretrained DNABERT representations</li>
+  <li>Fine-tuned on enhancer datasets</li>
+  <li>Outputs enhancer probability scores</li>
   <li>Supports genome-scale inference</li>
-  <li>Designed for high sensitivity enhancer detection</li>
 </ul>
-
-The model takes fixed-length DNA sequence windows as input and outputs a probability score indicating whether the sequence functions as an enhancer.
-
-## Model Architecture
-The DNABERT-Enhancer framework consists of:
-<ol>
-  <li>DNABERT pretrained transformer encoder</li>
-  <li>Sequence embedding layer</li>
-  <li>Classification head for enhancer prediction</li>
-  <li>Probability output layer</li>
-</ol>
 
 Input:
 DNA sequence (fixed-length window)
