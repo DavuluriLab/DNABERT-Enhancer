@@ -1,22 +1,40 @@
-# Genomic Language Model for Predicting Enhancers and Their Allele-Specific Activity in the Human Genome
-
-## Overview
-<p align="justify"> DNABERT-Enhancer is a machine learning method based on the genome foundational large language model DNABERT. The fine-tuned model successfully identify enhancer regions in the human genome by focusing on the high-attention regions in the enhancer sequences. Moreover, DNABERT-Enhancer is applied to identify and predict candidate non-coding genomic variants in the enhancer regions which can cause a significant shift in enhancer function as well as disrupt the  TFBSs within. This repository hosts the DNABERT-Enhancer model, datasets, and related resources. </p>
+# DNABERT-Enhancer
+## Transformer-based Model for Enhancer Prediction from DNA Sequences
+<p align="justify">DNABERT-Enhancer is a deep learning model designed to identify regulatory enhancer elements directly from DNA sequences. The model builds upon the DNABERT architecture and learns contextual representations of genomic sequences to distinguish enhancer regions from non-enhancer regions.
+This repository provides the official implementation of DNABERT-Enhancer, including pretrained models, prediction scripts, and evaluation workflows.</p>
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Abstract](#abstract)
-- [Model and Usage](#model-and-usage)
-  - [Requirements](#requirements)
-  - [Download Fine-tuned Models](#download-fine-tuned-models)
-  - [Fine-tuning the Model](#fine-tuning-the-model)
-  - [Getting Predictions from the Model](#getting-predictions-from-the-model)
-  - [Storing the Results in W&B](#storing-the-results-in-wb)
+- [Model Overview](#model-overview)
+- [Model Architecture](#model-architecture)
+- [Repository Structure](#repository-structure)
+- [Installation](#installation)
+- [Using the Pretrained Model](#using-the-pretrained-model)
+- [Running Prediction](#running-prediction)
+- [Training the Model](#training-the-model)
+- [Benchmark Evaluation](#benchmark-evaluation)
+- [Genome-wide Application](#genome-wide-application-optional-pipeline)
+- [Example Data](#example-data)
+- [Reproducibility](#reproducibility)
 - [Citation](#citation)
-- [Contact](#contact)
+- [Model and Data Availability](#model-and-data-availability)
+- [License](#license)
 
-## Introduction
-<p align="justify"> Enhancers coordinate the gene expression in a tissue-specific manner. Computational identification of these non-coding regulatory regions is challenging because of its intricate characteristics like varying lengths, ambiguous boundaries, functioning independent of their orientation and variable distances from associated promoters. Moreover, absence of well-defined genetic or epigenetic signatures that can accurately discriminate enhancers within genomic regions adds another layer of complexity. Enhancer malfunction due to genetic alteration mechanisms cause aberrant gene expression leading to genetic diseases like congenital disorders, cancers, and common complex diseases, collectively termed as enhanceropathies. Identifying disease-associated enhancers and recognizing GWAS-identified risk variants within them opens window for drug target discovery and enhancer-targeting therapies implying the clinical significance. Traditional machine learning methods often struggle to grasp the true context and the nuanced nature of enhancer DNA sequences, leading to uncertain real-world efficacy for enhancer prediction. </p>
+## Model Overview
+<p align="justify"> DNABERT-Enhancer is a sequence-based enhancer prediction model that uses transformer-based language modeling for genomic analysis.
+
+Key characteristics of the model:
+
+Built on a DNABERT backbone
+
+Learns contextual DNA sequence representations
+
+Predicts enhancer probability for input sequences
+
+Supports genome-scale inference
+
+Designed for high sensitivity enhancer detection
+
+The model takes fixed-length DNA sequence windows as input and outputs a probability score indicating whether the sequence functions as an enhancer.</p>
 
 ## Abstract
 <p align="justify">Predicting and deciphering the regulatory logic of enhancers is a challenging problem, due to the intricate sequence features and lack of consistent genetic or epigenetic signatures that can accurately discriminate enhancers from other genomic regions. Recent machine-learning based methods have spotlighted the importance of extracting nucleotide composition of enhancers, but models based solely on them fail to learn the sequence context and perform suboptimally.  Motivated by advances in genomic language models, we developed a novel enhancer prediction method, called DNABERT-Enhancer, by applying DNABERT pre-trained language model on the human genome. We trained two different models, one on 17,540 enhancers and the other on 36,927 enhancers curated from the ENCODE registry of candidate cis-Regulatory Elements (cCREs). The best fine-tuned model achieved performance of 88.05% accuracy with Matthews correlation coefficient (MCC) of 76% on independent set aside data. Further, we present the analysis of the predicted enhancers for all chromosomes of the human genome by comparing with the enhancer regions reported in publicly available databases. Finally, we applied DNABERT-Enhancer along with other DNABERT fine-tuned models to predict candidate SNPs with allele-specific enhancer and TF binding activity. The genome-wide enhancer annotations and candidate loss-of-function genetic variants predicted by DNABERT-Enhancer provide valuable resources for genome interpretation in functional and clinical genomics studies. </p>
