@@ -27,8 +27,6 @@ export OUTPUT_PATH=${OUTPUT_PATH:-"../../models/$ARCHITECTURE/$DATA_NAME/$DATA_S
 export TB_PATH=${TB_PATH:-"../../logs/$ARCHITECTURE/$DATA_NAME/$DATA_SPLIT/TB_Logfiles"}
 export SUMMARY_PATH=${SUMMARY_PATH:-"../../results/$ARCHITECTURE/$DATA_NAME/$DATA_SPLIT/Results"}
 
-# Move to DNABERT examples folder where run_finetune_WANDB.py
-cd ..
 
 # -----------------------------
 # Function to calculate logging and saving steps
