@@ -24,7 +24,7 @@ This repository provides the official implementation of DNABERT-Enhancer, includ
 
 Key characteristics of the model:
 <ul>
-  <li>Built on a DNABERT backbone</ul>
+  <li>Built on a DNABERT backbone</li>
   <li>Learns contextual DNA sequence representations</li>
   <li>Predicts enhancer probability for input sequences</li>
   <li>Supports genome-scale inference</li>
@@ -48,7 +48,7 @@ DNA sequence (fixed-length window)
 Output:
 Enhancer probability score
 
-
+## Repository Structure
 
 ## Model and Usage
 DNABERT-Enhancer is built upon [DNABERT](https://github.com/jerryji1993/DNABERT), a large language model for the human genome, fine-tuned specifically for enhancer prediction.. This section describes how to use the code in this repository, including setting up the environment, fine-tuning a new model, and generating predictions with a pre-trained model.
