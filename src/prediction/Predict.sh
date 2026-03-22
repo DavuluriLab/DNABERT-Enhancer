@@ -17,7 +17,7 @@ export CLASSES_NAME=${CLASSES_NAME:-"Enhancer_NonEnhancer"}
 # -----------------------------
 # Repository-relative paths
 # -----------------------------
-export MODEL_PATH=${MODEL_PATH:-"../../fine_tuned_model"}
+export MODEL_PATH=${MODEL_PATH:-"../../models"}
 export DATA_PATH=${DATA_PATH:-"../../data/$ARCHITECTURE/$DATA_NAME/"}
 export PREDICTION_PATH=${PREDICTION_PATH:-"../../results/$ARCHITECTURE/$DATA_NAME/$CHR/Prediction_result"}
 export SUMMARY_PATH=${SUMMARY_PATH:-"../../results/$ARCHITECTURE/$DATA_NAME/$CHR/Prediction_result"}
