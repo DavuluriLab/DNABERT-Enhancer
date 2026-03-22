@@ -7,11 +7,11 @@ This repository provides the official implementation of DNABERT-Enhancer, includ
 - [Model Overview](#model-overview)
 - [Repository Structure](#repository-structure)
 - [Model and Usage](#model-and-usage)
-  - [Install Dependencies](#install-dependencies)
-  - [Downloading the Pretrained Model](#downloading-the-pretrained-model)
-  - [Training the Model](#training-the-model)
-  - [Running Prediction](#running-prediction)
-  - [Storing Results in W&B](#storing-results-in-W&B)
+    - [Install Dependencies](#install-dependencies)
+    - [Downloading the Pretrained Model](#downloading-the-pretrained-model)
+    - [Training the Model](#training-the-model)
+    - [Running Prediction](#running-prediction)
+    - [Storing Results in W&B](#storing-results-in-W&B)
 - [Genome-wide Application](#genome-wide-application-optional-pipeline)
 - [Citation](#citation)
 - [Model and Data Availability](#model-and-data-availability)
@@ -35,7 +35,6 @@ DNA sequence (fixed-length window)
 Output:
 Enhancer probability score
 
-## Repository Structure
 ## Repository Structure
 ```
 DNABERT-Enhancer/
