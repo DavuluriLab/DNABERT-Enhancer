@@ -37,26 +37,32 @@ Output:
 Enhancer probability score
 
 ## Repository Structure
+## Repository Structure
+
 DNABERT-Enhancer/
-├── data/                      # Sample data + dataset links (full data on Zenodo)
-│   ├── prediction/
-│   │   ├── README.md
-│   ├── raw/
-│   │   ├── README.md
-│   └── sample/
+├── data/                         # Sample data + dataset links (full data on Zenodo)
+│   ├── raw/                      # Links to original enhancer databases
+│   │   └── README.md
+│   ├── prediction/               # Information about prediction datasets
+│   │   └── README.md
+│   └── sample/                   # Small dataset to test the pipeline
 │       ├── Train.tsv
 │       └── dev.tsv
-├── src/
-│   ├── prediction/
-│   │   ├── Predict.sh 
-│   └── training/
-│       ├── Training.sh
-│       └── run_finetune_WANDB.py
-├── models/                    # Pretrained models (hosted on Zenodo)
 │
-├── results/                   # Benchmark results and figures
+├── src/                          # Source code
+│   ├── training/
+│   │   ├── Training.sh
+│   │   └── run_finetune_WANDB.py
+│   └── prediction/
+│       └── Predict.sh
 │
-├── requirements.txt           # Python dependencies
+├── models/                       # Pretrained models (hosted on Zenodo)
+│   └── README.md
+│
+├── results/                      # Benchmark results and figures
+│   └── README.md
+│
+├── requirements.txt              # Python dependencies
 └── README.md
 
 ## Model and Usage
