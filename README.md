@@ -12,9 +12,8 @@ This repository provides the official implementation of DNABERT-Enhancer, includ
     - [Training the Model](#training-the-model)
     - [Running Prediction](#running-prediction)
     - [Storing Results in W&B](#storing-results-in-W&B)
-- [Genome-wide Application](#genome-wide-application-optional-pipeline)
-- [Citation](#citation)
 - [Model and Data Availability](#model-and-data-availability)
+- [Citation](#citation)
 - [License](#license)
 
 ## Model Overview
@@ -95,7 +94,7 @@ The Fine-tuned DNABERT-Enhancer models namely, DNABERT-Enhancer-201 and DNABERT-
 https://doi.org/10.5281/zenodo.19157566
 
 After downloading, place the model files inside:
-```
+```bash
 models/
 ```
 
@@ -103,55 +102,18 @@ models/
 ---
 The repository includes scripts for fine-tuning DNABERT on enhancer datasets. Open the "Training.sh" script and modify the environment variables at the top to match your system's directory structure. You must set `MODEL_PATH`, `DATA_PATH`, `OUTPUT_PATH`, etc.
 Example training command:
-```
+```bash
 bash src/training/Training.sh
 ```
 
 ### Running Prediction
 ---
-To get predictions on new data using a fine-tuned model, use the `predict.sh` script.
-1.  **Configure Paths:**  Update the `MODEL_PATH` to point to your fine-tuned model directory and `DATA_PATH` to point to the data you want to analyze.
-2.  **Execute the Script:** Run the script from your terminal.
-**`predict.sh`**
+To get predictions on data using the fine-tuned model, use the `Predict.sh` script. Update the `MODEL_PATH` to point to your fine-tuned model directory and `DATA_PATH` to point to the data you want to analyze.
 ```bash
-#!/bin/bash
-
-# --- 1. CONFIGURE YOUR PATHS ---
-export KMER=6
-export DATA_NAME=TFBS_prediction
-export ARCHITECTURE=TFBS_H3K27ac
-export CLASSES_NAME="Enhancer_NonEnhancer"
-export MODEL_PATH="/path/to/your/finetuned_model_checkpoint"   # UPDATE THIS
-export DATA_PATH="/path/to/your/prediction_data/$DATA_NAME"    # UPDATE THIS
-export PREDICTION_PATH="/path/to/your/output/Predictions"      # UPDATE THIS
-export SUMMARY_PATH="/path/to/your/output/Results"             # UPDATE THIS
-export TB_PATH="/path/to/your/output/TB_Logfiles"              # UPDATE THIS
-export CUDA_VISIBLE_DEVICES=1,2,3,4,5
-
-# --- 2. RUN PREDICTION ---
-# Ensure you are in the directory containing run_finetune_WANDB.py before running.
-
-python scripts/run_finetune_WANDB.py \
-    --model_type dna \
-    --tokenizer_name=dna$KMER \
-    --model_name_or_path $MODEL_PATH \
-    --task_name dnaprom \
-    --do_visualize \
-    --visualize_data_dir $DATA_PATH \
-    --classes_name $CLASSES_NAME \
-    --architecture $ARCHITECTURE \
-    --visualize_models $KMER \
-    --data_dir $DATA_PATH \
-    --max_seq_length 200 \
-    --per_gpu_pred_batch_size=64 \
-    --output_dir $MODEL_PATH \
-    --predict_dir $PREDICTION_PATH \
-    --tb_log_dir $TB_PATH \
-    --wandb_tags $ARCHITECTURE $CLASSES_NAME $DATA_NAME \
-    --summary_dir $SUMMARY_PATH \
-    --n_process 30
+bash src/prediction/Predict.sh
 ```
-### Storing the Results in W&B
+
+### Storing Results in W&B
 ---
 Both the fine-tuning and prediction scripts are integrated with **Weights & Biases (W&B)** for experiment tracking. When you run the scripts, the following information is automatically logged to your W&B account:
 
@@ -162,13 +124,36 @@ Both the fine-tuning and prediction scripts are integrated with **Weights & Bias
 
 This allows for easy comparison between runs and ensures full reproducibility of our results. All experiments from our paper are logged and can be viewed in our public W&B project (link to be provided upon publication).
 
-### Model Highlights:
+## Model and Data Availability
 ---
-<img src="Figures/Model_performance.png" title="Performance metrics of the two DNABERT-Enhancer models">
+The DNABERT-Enhancer framework is fully open and publicly available.
+
+Code repository:
+https://github.com/DavuluriLab/DNABERT-Enhancer
+
+Trained models and associated resources:
+https://doi.org/10.5281/zenodo.19157566
+
+Interactive exploration of genome-wide predictions:
+https://dnabert-enhancer-datarepo.streamlit.app/
+
+Sample datasets required to test the pipeline are included in this repository.
+Links to full datasets and external enhancer databases are provided within the data/ directory.
 
 ## Citation
 ---
 If you use the DNABERT-Enhancer in your research, please cite our paper:
+
+```bib
+
+@article{Sathian2025DNABERTEnhancer,
+    author = {Sathian, Rekha and Dutta, Pranjal and Ay, Ferhat and Davuluri, Ramana V},
+    title = {Genomic Language Model for Predicting Enhancers and Their Allele-Specific Activity in the Human Genome},
+    journal = {bioRxiv},
+    year = {2025},
+    doi = {10.1101/2025.03.18.644040},
+    url = {https://doi.org/10.1101/2025.03.18.644040}
+```
 
 ```bib
 
@@ -186,13 +171,9 @@ If you use the DNABERT-Enhancer in your research, please cite our paper:
     url = {https://doi.org/10.1093/bioinformatics/btab083},
     eprint = {https://academic.oup.com/bioinformatics/article-pdf/37/15/2112/50578892/btab083.pdf},
 }
+```
 
-
-@misc{zhou2023dnabert2,
-      title={DNABERT-2: Efficient Foundation Model and Benchmark For Multi-Species Genome}, 
-      author={Zhihan Zhou and Yanrong Ji and Weijian Li and Pratik Dutta and Ramana Davuluri and Han Liu},
-      year={2023},
-      eprint={2306.15006},
-      archivePrefix={arXiv},
-      primaryClass={q-bio.GN}
-}
+## License
+---
+This project is licensed under the Apache License 2.0.
+See the LICENSE file for details.
