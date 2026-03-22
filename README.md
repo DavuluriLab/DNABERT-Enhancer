@@ -6,14 +6,13 @@ This repository provides the official implementation of DNABERT-Enhancer, includ
 ## Table of Contents
 - [Model Overview](#model-overview)
 - [Repository Structure](#repository-structure)
-- [Installation](#installation)
-- [Using the Pretrained Model](#using-the-pretrained-model)
-- [Running Prediction](#running-prediction)
-- [Training the Model](#training-the-model)
-- [Benchmark Evaluation](#benchmark-evaluation)
+- [Model and Usage](#model-and-usage)
+  - [Install Dependencies](#install-dependencies)
+  - [Downloading the Pretrained Model](#downloading-the-pretrained-model)
+  - [Training the Model](#training-the-model)
+  - [Running Prediction](#running-prediction)
+  - [Storing Results in W&B](#storing-results-in-W&B)
 - [Genome-wide Application](#genome-wide-application-optional-pipeline)
-- [Example Data](#example-data)
-- [Reproducibility](#reproducibility)
 - [Citation](#citation)
 - [Model and Data Availability](#model-and-data-availability)
 - [License](#license)
@@ -66,21 +65,39 @@ DNABERT-Enhancer/
 └── README.md
 ```
 ## Model and Usage
-DNABERT-Enhancer is built upon [DNABERT](https://github.com/jerryji1993/DNABERT), a large language model for the human genome, fine-tuned specifically for enhancer prediction.. This section describes how to use the code in this repository, including setting up the environment, fine-tuning a new model, and generating predictions with a pre-trained model.
+DNABERT-Enhancer is built upon [DNABERT](https://github.com/jerryji1993/DNABERT), a large language model for the human genome, fine-tuned specifically for enhancer prediction. This section describes how to use the code in this repository, including setting up the environment, fine-tuning a new model, and generating predictions with a pre-trained model.
 
-  ### Requirements
-  Before running the scripts, please install the necessary dependencies. We recommend creating a Python virtual environment. You can install all required packages using the `requirements.txt` file:
-  ```bash
-  pip install -r requirements.txt
-  ```
-  **Login to W&B:** The scripts use Weights & Biases for experiment tracking. You will need to log into your W&B account from your terminal.
-  ```bash
-  wandb login
-  ```
+### Install Dependencies
+Clone the repository and install the required Python packages. You can install all required packages using the `requirements.txt` file:
+```bash
+git clone https://github.com/DavuluriLab/DNABERT-Enhancer.git
+cd DNABERT-Enhancer
+pip install -r requirements.txt
+```
+Alternatively, using conda:
+```bash
+conda create -n dnabert_enhancer python=3.10
+conda activate dnabert_enhancer
+pip install -r requirements.txt
+```
+**Login to W&B:** The scripts use Weights & Biases for experiment tracking. You will need to log into your W&B account from your terminal.
+```bash
+wandb login
+```
 
-### Download Fine-tuned Models
+### Downloading the Pretrained Model
 ---
-The final fine-tuned models used to generate the results in our paper are currently under review. **Upon formal acceptance of the paper, we will upload all model weights to a public repository (e.g., Hugging Face Hub or Zenodo) and provide the download links here.**
+DNABERT-Enhancer uses the pretrained DNABERT model as the base architecture. The official DNABERT implementation and pretrained weights can be obtained from the DNABERT repository:
+https://github.com/jerryji1993/DNABERT
+Follow the installation instructions provided in the DNABERT repository.
+
+The Fine-tuned DNABERT-Enhancer models namely, DNABERT-Enhancer-201 and DNABERT-Enhancer-350, built in this study are available on Zenodo:
+https://doi.org/10.5281/zenodo.19157566
+
+After downloading, place the model files inside:
+```
+models/
+```
 
 ### Fine-tuning the Model
 ---
