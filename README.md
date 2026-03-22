@@ -37,6 +37,27 @@ Output:
 Enhancer probability score
 
 ## Repository Structure
+DNABERT-Enhancer/
+├── data/                      # Sample data + dataset links (full data on Zenodo)
+│   ├── prediction/
+│   │   ├── README.md
+│   ├── raw/
+│   │   ├── README.md
+│   └── sample/
+│       ├── Train.tsv
+│       └── dev.tsv
+├── src/
+│   ├── prediction/
+│   │   ├── Predict.sh 
+│   └── training/
+│       ├── Training.sh
+│       └── run_finetune_WANDB.py
+├── models/                    # Pretrained models (hosted on Zenodo)
+│
+├── results/                   # Benchmark results and figures
+│
+├── requirements.txt           # Python dependencies
+└── README.md
 
 ## Model and Usage
 DNABERT-Enhancer is built upon [DNABERT](https://github.com/jerryji1993/DNABERT), a large language model for the human genome, fine-tuned specifically for enhancer prediction.. This section describes how to use the code in this repository, including setting up the environment, fine-tuning a new model, and generating predictions with a pre-trained model.
