@@ -128,49 +128,44 @@ DNABERT-Enhancer includes two models namely, DNABERT-Enhancer-201 and DNABERT-En
 <table align="center">
   <thead>
     <tr>
-      <th rowspan="2">Training Dataset</th>
-      <th rowspan="2">Testing Dataset</th>
-      <th colspan="5">Performance Metrics</th>
+      <th rowspan="2">Models</th>
+      <th colspan="5">Eds-201-Test</th>
+      <th colspan="5">Eds-350-Test</th>
     </tr>
     <tr>
       <th>Accuracy (%)</th>
       <th>Precision (%)</th>
       <th>Recall (%)</th>
-      <th>F1 Score (%)</th>
+      <th>F1 score (%)</th>
+      <th>MCC (%)</th>
+      <th>Accuracy (%)</th>
+      <th>Precision (%)</th>
+      <th>Recall (%)</th>
+      <th>F1 score (%)</th>
       <th>MCC (%)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Eds-201</td>
-      <td>Eds-201</td>
-      <td>82.04</td>
-      <td>84.64</td>
-      <td>78.29</td>
-      <td>81.30</td>
-      <td>64.27</td>
+      <td>Random Forest</td>
+      <td>80.71</td>
+      <td>79.55</td>
+      <td>82.67</td>
+      <td>81.08</td>
+      <td>61.47</td>
+      <td>87.33</td>
+      <td>89.94</td>
+      <td>84.06</td>
+      <td>86.90</td>
+      <td>74.81</td>
     </tr>
     <tr>
-      <td>Eds-201</td>
-      <td>Eds-350</td>
-      <td>79.18</td>
-      <td>81.92</td>
-      <td>74.63</td>
-      <td>78.10</td>
-      <td>58.40</td>
-    </tr>
-    <tr>
-      <td>Eds-350</td>
-      <td>Eds-201</td>
-      <td>83.72</td>
-      <td>86.15</td>
-      <td>80.02</td>
-      <td>82.97</td>
-      <td>67.44</td>
-    </tr>
-    <tr>
-      <td>Eds-350</td>
-      <td>Eds-350</td>
+      <td><b>DNABERT-Enhancer</b></td>
+      <td><b>82.04</b></td>
+      <td><b>84.64</b></td>
+      <td><b>78.29</b></td>
+      <td><b>81.3</b></td>
+      <td><b>64.27</b></td>
       <td><b>88.05</b></td>
       <td><b>90.27</b></td>
       <td><b>85.29</b></td>
