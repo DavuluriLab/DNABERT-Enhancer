@@ -117,3 +117,5 @@ DNABERT-Enhancer includes two models namely, DNABERT-Enhancer-201 and DNABERT-En
     </tr>
   </tbody>
 </table>
+
+### Comparison to Recent enhancer prediction models
