@@ -147,7 +147,7 @@ DNABERT-Enhancer includes two models namely, DNABERT-Enhancer-201 and DNABERT-En
   </thead>
   <tbody>
     <tr>
-      <td>Random Forest</td>
+      <td>Nucleotide transformer (NT)</td>
       <td>80.71</td>
       <td>79.55</td>
       <td>82.67</td>
