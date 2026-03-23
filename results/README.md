@@ -120,5 +120,62 @@ DNABERT-Enhancer includes two models namely, DNABERT-Enhancer-201 and DNABERT-En
 
 ### Comparison to Recent enhancer prediction models
 <p align="center">
-  <img src="https://raw.githubusercontent.com/DavuluriLab/DNABERT-Enhancer/main/docs/Model_comparison.png" width="750">
+  <img src="https://raw.githubusercontent.com/DavuluriLab/DNABERT-Enhancer/main/docs/Model_comparison.png" width="500">
 </p>
+
+### Comparison to the Nucleotide transformer
+
+<table align="center">
+  <thead>
+    <tr>
+      <th rowspan="2">Training Dataset</th>
+      <th rowspan="2">Testing Dataset</th>
+      <th colspan="5">Performance Metrics</th>
+    </tr>
+    <tr>
+      <th>Accuracy (%)</th>
+      <th>Precision (%)</th>
+      <th>Recall (%)</th>
+      <th>F1 Score (%)</th>
+      <th>MCC (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Eds-201</td>
+      <td>Eds-201</td>
+      <td>82.04</td>
+      <td>84.64</td>
+      <td>78.29</td>
+      <td>81.30</td>
+      <td>64.27</td>
+    </tr>
+    <tr>
+      <td>Eds-201</td>
+      <td>Eds-350</td>
+      <td>79.18</td>
+      <td>81.92</td>
+      <td>74.63</td>
+      <td>78.10</td>
+      <td>58.40</td>
+    </tr>
+    <tr>
+      <td>Eds-350</td>
+      <td>Eds-201</td>
+      <td>83.72</td>
+      <td>86.15</td>
+      <td>80.02</td>
+      <td>82.97</td>
+      <td>67.44</td>
+    </tr>
+    <tr>
+      <td>Eds-350</td>
+      <td>Eds-350</td>
+      <td><b>88.05</b></td>
+      <td><b>90.27</b></td>
+      <td><b>85.29</b></td>
+      <td><b>87.71</b></td>
+      <td><b>76.22</b></td>
+    </tr>
+  </tbody>
+</table>
