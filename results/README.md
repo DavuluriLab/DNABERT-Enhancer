@@ -174,3 +174,6 @@ DNABERT-Enhancer includes two models namely, DNABERT-Enhancer-201 and DNABERT-En
     </tr>
   </tbody>
 </table>
+
+## DNABERT-Enhancer-350 predictions
+The candidate gain- and loss-of-function enhancer variants predicted by the DNABERT-Enhancer-350 model using ENCODE SCREEN enhancers (350 bp) and the genome-wide enhancer predictions across the human reference genome (GRCh38) are avialable at [the DNABERT-Enhancer portal](https://dnabert-enhancer-datarepo.streamlit.app/) 
