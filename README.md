@@ -53,7 +53,11 @@ DNABERT-Enhancer/
 │   └── prediction/
 │       └── Predict.sh
 │
-├── models/                       # Pretrained models (hosted on Zenodo)
+├── scripts/                       # Additional scripts for processing data
+│   ├── Create_input_data.py
+│   └── README.md
+│
+├── models/                       # Fine-tuned models (hosted on Zenodo)
 │   └── README.md
 │
 ├── results/                      # Benchmark results and figures
