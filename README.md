@@ -37,7 +37,7 @@ Enhancer probability score
 ## Repository Structure
 ```
 DNABERT-Enhancer/
-├── data/                         # Sample data + dataset links (full data on Zenodo)
+├── data/                         # Sample data + dataset links
 │   ├── raw/                      # Links to original enhancer databases
 │   │   └── README.md
 │   ├── prediction/               # Information about prediction datasets
@@ -53,7 +53,7 @@ DNABERT-Enhancer/
 │   └── prediction/
 │       └── Predict.sh
 │
-├── scripts/                       # Additional scripts for processing data
+├── scripts/                      # Additional scripts for processing data
 │   ├── Create_input_data.py
 │   └── README.md
 │
