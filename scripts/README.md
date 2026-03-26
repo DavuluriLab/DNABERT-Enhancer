@@ -1,6 +1,6 @@
 This folder contains additional programs to process data
 
-## Negative sequences
+## Generates negative instances and prepares sequences for fine-tuning
 
 The Python script **bed_to_fasta_with_negatives.py** is designed to prepare datasets for enhancer fine-tuning. It generates negative instances from your positive/peak coordinates, combines them with positive instances, and extracts sequences from a reference genome. The output includes:
 
