@@ -21,7 +21,7 @@ pybedtools
 
 ### Usage
 ```
-python Create_Negative_set.py \
+python bed_to_fasta_with_negatives.py \
     --pred <BED_FILE> \
     --ref_genome_filepath <REFERENCE_GENOME_FOLDER> \
     --genome_size_file <GENOME_SIZE_FILE> \
