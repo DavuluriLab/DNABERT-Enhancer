@@ -54,7 +54,8 @@ DNABERT-Enhancer/
 │       └── Predict.sh
 │
 ├── scripts/                      # Additional scripts for processing data
-│   ├── Create_input_data.py
+│   ├── bed_to_fasta_with_negatives.py
+│   ├── fine-tune_data.py
 │   └── README.md
 │
 ├── models/                       # Fine-tuned models (hosted on Zenodo)
