@@ -1,5 +1,7 @@
 This folder contains additional programs to process data
 
+## Negative sequences
+
 ## For creating input file
 The script Create_input_data.py generates the input file required for prediction with DNABERT-Enhancer. It extracts genomic sequences
 from a reference genome (organized per chromosome) using coordinates from a **BED** file and converts them into overlapping k-mers. The output file contains two columns
