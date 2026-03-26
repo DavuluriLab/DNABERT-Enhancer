@@ -90,7 +90,7 @@ def generate_fasta(seq, out):
 
     seq_df=pd.read_csv(seq)
     seq_df['id']=seq_df['chr']+":"+seq_df['start'].astype(str)+"-"+seq_df['end'].astype(str)+"; label="+seq_df['label'].astype(str)
-    fasta_file = os.path.join(out+"Positive_and_negative_instances_with_sequences.fasta')
+    fasta_file = os.path.join(out+'Positive_and_negative_instances_with_sequences.fasta')
 
     with open(fasta_file, 'w') as f:
         for index, row in seq_df.iterrows():
