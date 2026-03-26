@@ -1,7 +1,6 @@
 This folder contains additional programs to process data
 
 ## Generates negative instances and prepares sequences for fine-tuning
-
 The Python script **bed_to_fasta_with_negatives.py** is designed to prepare datasets for enhancer fine-tuning. It generates negative instances from your positive/peak coordinates, combines them with positive instances, and extracts sequences from a reference genome. The output includes:
 
 A combined **BED** file (positive + negative regions)
@@ -29,4 +28,25 @@ python bed_to_fasta_with_negatives.py \
     --out <OUTPUT_DIRECTORY_PATH> \
     --tmpdir <TEMPORARY_DIRECTORY_PATH> \
     --length_limit <MIN_PEAK_LENGTH>
+```
+
+## Prepare Fine-Tune Dataset from FASTA
+This script generates k-mer representations from a FASTA file containing labeled sequences and splits the dataset into into **train/dev/test** or **train/test** with customizable ratio(eg. 80:10:10 or 80:20) for downstream machine learning fine-tuning.
+
+### Requirements
+Python packages required:
+```
+pandas
+biopython
+scikit-learn
+```
+
+### Usage
+```
+python fine-tune_data.py \
+    --fasta <BED_FILE> \
+    --out <OUTPUT_DIRECTORY_PATH> \
+    --tmpdir <TEMPORARY_DIRECTORY_PATH> \
+    --kmer_length <KMER_LENGTH> \
+    --split <training_split>
 ```
